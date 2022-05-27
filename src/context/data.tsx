@@ -5,7 +5,6 @@ import {
   useState,
   useContext,
 } from "react";
-import axios from "axios";
 import reducerAddCount from "./reducerAddCount";
 
 interface Children {
@@ -37,7 +36,7 @@ const UserProvider = ({ children }: Children) => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const response = await axios.get("https://api.github.com/users");
+      const response = await fetch("https://api.github.com/users");
       const data = await response.data;
       setUsers(data);
     };
