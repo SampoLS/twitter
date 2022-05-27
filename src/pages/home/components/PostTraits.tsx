@@ -81,6 +81,7 @@ const Box = styled.div`
   max-width: 400px;
   min-width: 300px;
   padding-top: 1.3rem;
+  padding-left: 1rem;
   display: flex;
 
   .box {

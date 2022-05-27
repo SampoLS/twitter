@@ -28,13 +28,29 @@ export default function Home() {
       </Postarea>
       {posts ? (
         posts.map((post: any) => {
-          const { id, name, contents, avatarUrl } = post;
+          const { id, name, contents, avatarUrl, imgUrl } = post;
+
+          let width, height;
+          if (imgUrl) {
+            const res = imgUrl.split("/")
+            const imgSize = res[res.length - 1]
+            const size = imgSize.split("x")
+            width = size[0]
+            height = size[1]
+          }
+
           return (
             <SinglePost key={id}>
               <Avatar imgUrl={avatarUrl} />
-              <Contents username={name} contents={contents}>
+              <article style={{ flex: 1 }}>
+                <Contents
+                  username={name}
+                  contents={contents}
+                  imgUrl={imgUrl}
+                  width={width}
+                  height={height} />
                 <PostTraits post={post} />
-              </Contents>
+              </article>
             </SinglePost>
           );
         })

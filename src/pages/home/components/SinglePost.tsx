@@ -9,4 +9,8 @@ const Box = styled.section`
   display: flex;
   padding: 1rem;
   border-bottom: 1px solid #eee;
+  transition: all 70ms linear;
+  &:hover {
+    background: #F6F6F6;
+  }
 `;

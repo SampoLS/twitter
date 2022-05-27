@@ -8,7 +8,8 @@
       "reply": 10,
       "retweet": 49,
       "favs": 63,
-      "isLiked": true
+      "isLiked": true,
+      "imgUrl": "https://source.unsplash.com/random/400x500"
     },
     {
       "id": 2,
@@ -18,7 +19,8 @@
       "reply": 40,
       "retweet": 249,
       "favs": 46,
-      "isLiked": false
+      "isLiked": false,
+      "imgUrl": "https://source.unsplash.com/random/500x200"
     },
     {
       "id": 3,
@@ -28,7 +30,8 @@
       "reply": 459,
       "retweet": 4032,
       "favs": 471,
-      "isLiked": false
+      "isLiked": false,
+      "imgUrl": "https://source.unsplash.com/random/500x400"
     },
     {
       "id": 4,
@@ -38,7 +41,8 @@
       "reply": 21,
       "retweet": 48,
       "favs": 21,
-      "isLiked": true
+      "isLiked": true,
+      "imgUrl": "https://source.unsplash.com/random/400x400"
     }
   ]
 }
