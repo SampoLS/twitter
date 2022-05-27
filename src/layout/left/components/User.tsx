@@ -1,15 +1,35 @@
 import styled from "styled-components";
 import userLogo from "../../../assets/imgs/userlogo.jpg";
 
+import { useGetUserQuery } from "../../../service/postsApi";
+
+interface User {
+  id: string;
+  name: string;
+  isLogined: boolean;
+}
+
 export default function User() {
+  const { data: users } = useGetUserQuery("");
+
+  let user;
+  if (users) {
+    const filteredUser:Array<User> = users.filter((user: User) => user.id === "mr_good_man")
+    user = filteredUser[0];
+  }
+
   return (
     <Box>
       <ImgBox>
         <img src={userLogo} alt="user" />
       </ImgBox>
       <Userbox>
-        <h4>tamelo</h4>
-        <p>@mr_good_man</p>
+        {user && (
+         <>
+            <h4>{user.name}</h4>
+            <p>@{user.id}</p>
+         </>
+        )}
       </Userbox>
     </Box>
   );

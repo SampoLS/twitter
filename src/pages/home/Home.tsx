@@ -11,6 +11,7 @@ import Contents from "./components/Contents";
 import AddPost from "./components/AddPost";
 import imgUrl from "../../assets/imgs/userlogo.jpg";
 import PostTraits from "./components/PostTraits";
+import Position from "./components/Position"
 
 import { useGetPostsQuery } from "../../service/postsApi";
 
@@ -28,7 +29,7 @@ export default function Home() {
       </Postarea>
       {posts ? (
         posts.map((post: any) => {
-          const { id, name, contents, avatarUrl, imgUrl } = post;
+          const { id, name, userId, contents, avatarUrl, imgUrl } = post;
 
           let width, height;
           if (imgUrl) {
@@ -41,16 +42,21 @@ export default function Home() {
 
           return (
             <SinglePost key={id}>
-              <Avatar imgUrl={avatarUrl} />
-              <article style={{ flex: 1 }}>
-                <Contents
-                  username={name}
-                  contents={contents}
-                  imgUrl={imgUrl}
-                  width={width}
-                  height={height} />
-                <PostTraits post={post} />
-              </article>
+              <Position />
+              <div style={{ display: "flex" }}>
+                <Avatar imgUrl={avatarUrl} />
+                <article style={{ flex: 1 }}>
+                  <Contents
+                    username={name}
+                    contents={contents}
+                    imgUrl={imgUrl}
+                    width={width}
+                    height={height}
+                    userId={userId}
+                  />
+                  <PostTraits post={post} />
+                </article>
+              </div>
             </SinglePost>
           );
         })

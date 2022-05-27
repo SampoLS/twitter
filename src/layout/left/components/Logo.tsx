@@ -11,11 +11,15 @@ export default function Logo() {
     </LogoBox>
   );
 }
+
 const LogoBox = styled.div`
-  font-size: 1.8rem;
   padding-top: 1rem;
   padding-left: 1.2rem;
   a {
     color: dodgerblue;
+    
+    svg {
+      font-size: 2rem;
+    }
   }
 `;

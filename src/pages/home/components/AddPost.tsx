@@ -32,6 +32,7 @@ export default function AddPost() {
   const onTweetClick = async () => {
     await updatedPost({
       name: "tamelo",
+      userId: "mr_good_man",
       contents: post,
       avatarUrl: userLogo,
       reply: Math.ceil(Math.random() + 4) * 21,

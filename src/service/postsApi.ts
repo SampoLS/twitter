@@ -26,8 +26,16 @@ export const api = createApi({
           body
         }
       }
+    }),
+    getUser: builder.query({
+      query: () => "/users"
     })
   }),
 });
 
-export const { useGetPostsQuery, useAddPostMutation, useUpdatePostMutation } = api;
+export const { 
+  useGetPostsQuery,
+  useAddPostMutation,
+  useUpdatePostMutation,
+  useGetUserQuery
+} = api;

@@ -6,7 +6,6 @@ export default function SinglePost({ children }: Props) {
 }
 const Box = styled.section`
   width: 100%;
-  display: flex;
   padding: 1rem;
   border-bottom: 1px solid #eee;
   transition: all 70ms linear;
