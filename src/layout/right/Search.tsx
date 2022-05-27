@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { FiSearch } from "react-icons/fi";
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 export default function Search() {
   return (
     <Box>
       <SearchBox>
-        <span><FiSearch /></span>
+        <span><SearchOutlinedIcon /></span>
         <input type="search" placeholder="Search Twitter" />
       </SearchBox>
     </Box>

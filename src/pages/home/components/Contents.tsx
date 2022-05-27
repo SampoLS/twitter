@@ -1,21 +1,20 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 interface Props {
   username: string;
+  contents: string;
   children: React.ReactNode;
 }
 
-export default function UserTalks({ username, children }: Props) {
+export default function Contents({ username, contents, children }: Props) {
   return (
     <Box>
       <div>
         <h4>{username}</h4>
       </div>
       <div className="words">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam, dicta.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
-        voluptatum sint ratione accusamus officiis, ex sunt voluptates totam
-        veritatis dolorum?
+        <Link to={`${username}`}>{contents ? contents : "loading..."}</Link>
       </div>
       <>{children}</>
     </Box>

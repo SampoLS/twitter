@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Props } from "../../../layout/Layout";
 
-export default function UserPosts({ children }: Props) {
+export default function SinglePost({ children }: Props) {
   return <Box>{children}</Box>;
 }
 const Box = styled.section`

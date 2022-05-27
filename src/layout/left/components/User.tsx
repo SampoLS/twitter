@@ -8,7 +8,7 @@ export default function User() {
         <img src={userLogo} alt="user" />
       </ImgBox>
       <Userbox>
-        <h4>ro sampo</h4>
+        <h4>tamelo</h4>
         <p>@mr_good_man</p>
       </Userbox>
     </Box>

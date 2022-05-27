@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "name": "tom",
+      "contents": "et iusto sed quo iure voluptatem occaecati omnis eligendi aut ad voluptatem doloribus vel accusantium quis pariatur molestiae porro eius odio et labore et velit aut",
+      "avatarUrl": "https://source.unsplash.com/random/50x60",
+      "reply": 10,
+      "retweet": 49,
+      "favs": 63,
+      "isLiked": true
+    },
+    {
+      "id": 2,
+      "name": "jerry",
+      "contents": "et iusto sed quo iure voluptatem occaecati omnis eligendi aut ad voluptatem doloribus vel accusantium quis pariatur molestiae porro eius odio et labore et velit aut",
+      "avatarUrl": "https://source.unsplash.com/random/60x60",
+      "reply": 40,
+      "retweet": 249,
+      "favs": 46,
+      "isLiked": false
+    },
+    {
+      "id": 3,
+      "name": "spike",
+      "contents": "et iusto sed quo iure voluptatem occaecati omnis eligendi aut ad voluptatem doloribus vel accusantium quis pariatur molestiae porro eius odio et labore et velit aut",
+      "avatarUrl": "https://source.unsplash.com/random/50x50",
+      "reply": 459,
+      "retweet": 4032,
+      "favs": 471,
+      "isLiked": false
+    },
+    {
+      "id": 4,
+      "name": "tamelo",
+      "contents": "We are all in the gutter, but some of us are looking at the stars.",
+      "avatarUrl": "/static/media/userlogo.996b25f654e922226f13.jpg",
+      "reply": 21,
+      "retweet": 48,
+      "favs": 21,
+      "isLiked": true
+    }
+  ]
+}

@@ -1,15 +1,14 @@
-import { memo } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Page from "./layout/Page";
 import Explore from "./pages/explore/Explore";
 import Home from "./pages/home/Home";
 
-const App = (): JSX.Element => {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Page />}>
-          <Route path="home" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="explore" element={<Explore />} />
           <Route path="*" element={<Home />} />
         </Route>
@@ -17,4 +16,4 @@ const App = (): JSX.Element => {
     </BrowserRouter>
   );
 };
-export default memo(App);
+export default App;

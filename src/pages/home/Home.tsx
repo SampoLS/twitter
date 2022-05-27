@@ -1,40 +1,49 @@
-import { memo, useContext } from "react";
+import { Fragment } from "react";
 import styled from "styled-components";
 
-import Post from "./components/Post";
-import Title from "./components/Title";
-import UserLogo from "./components/UserLogo";
-import AuthorPost from "./components/AuthorPost";
-import UserPosts from "./components/UserPosts";
-import { UserContext } from "../../context/data";
-import UserTalks from "./components/UserTalks";
-import imgUrl from "../../assets/imgs/userlogo.jpg";
-import UserComment from "./components/UserComment";
+import Avatar from "./components/Avatar";
 
-const Home = () => {
-  const person = useContext(UserContext);
+import AuthorPost from "./components/AuthorPost";
+import Title from "./components/Title";
+
+import SinglePost from "./components/SinglePost";
+import Contents from "./components/Contents";
+import AddPost from "./components/AddPost";
+import imgUrl from "../../assets/imgs/userlogo.jpg";
+import PostTraits from "./components/PostTraits";
+
+import { useGetPostsQuery } from "../../service/postsApi";
+
+export default function Home() {
+  const { data: posts } = useGetPostsQuery("");
+
   return (
-    <>
+    <Fragment>
       <Title />
       <Postarea>
         <AuthorPost>
-          <UserLogo imgUrl={imgUrl} />
-          <Post />
+          <Avatar imgUrl={imgUrl} />
+          <AddPost />
         </AuthorPost>
       </Postarea>
-      {person.users.map((person) => {
-        return (
-          <UserPosts key={person.id}>
-            <UserLogo imgUrl={person.avatar_url} />
-            <UserTalks username={person.login}>
-              <UserComment />
-            </UserTalks>
-          </UserPosts>
-        );
-      })}
-    </>
+      {posts ? (
+        posts.map((post: any) => {
+          const { id, name, contents, avatarUrl } = post;
+          return (
+            <SinglePost key={id}>
+              <Avatar imgUrl={avatarUrl} />
+              <Contents username={name} contents={contents}>
+                <PostTraits post={post} />
+              </Contents>
+            </SinglePost>
+          );
+        })
+      ) : (
+        <h2>...loading</h2>
+      )}
+    </Fragment>
   );
-};
+}
 
 const Postarea = styled.section`
   width: 100%;
@@ -42,4 +51,3 @@ const Postarea = styled.section`
   margin-top: 50px;
   border-bottom: 1px solid #eee;
 `;
-export default memo(Home);

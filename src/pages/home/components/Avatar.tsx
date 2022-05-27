@@ -5,7 +5,7 @@ interface ImgUrl {
   imgUrl: string;
 }
 
-const UserLogo = ({ imgUrl }: ImgUrl) => {
+const Avatar = ({ imgUrl }: ImgUrl) => {
   return (
     <ImgBox>
       <img src={imgUrl} alt="user" />
@@ -23,4 +23,4 @@ const ImgBox = styled.div`
     height: inherit;
   }
 `;
-export default memo(UserLogo);
+export default memo(Avatar);

@@ -1,4 +1,4 @@
-import { BsTwitter } from "react-icons/bs";
+import TwitterIcon from '@mui/icons-material/Twitter';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -6,7 +6,7 @@ export default function Logo() {
   return (
     <LogoBox>
       <NavLink to="/home">
-        <BsTwitter />
+        <TwitterIcon />
       </NavLink>
     </LogoBox>
   );

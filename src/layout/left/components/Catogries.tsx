@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { AiFillHome, AiOutlineMessage, AiOutlineUser } from "react-icons/ai";
-import { RiFindReplaceLine } from "react-icons/ri";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { BsBookmark, BsCardList } from "react-icons/bs";
-import { CgMoreO } from "react-icons/cg";
-import { useUserContext } from "../../../context/data";
+import HomeIcon from '@mui/icons-material/Home';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import MessageIcon from '@mui/icons-material/Message';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 type Cator = {
   id: number;
@@ -14,18 +16,17 @@ type Cator = {
 }[];
 
 const catogries: Cator = [
-  { id: 1, title: "Home", icon: <AiFillHome /> },
-  { id: 2, title: "Explore", icon: <RiFindReplaceLine /> },
-  { id: 3, title: "Notifications", icon: <IoMdNotificationsOutline /> },
-  { id: 4, title: "Messages", icon: <AiOutlineMessage /> },
-  { id: 5, title: "Bookmarks", icon: <BsBookmark /> },
-  { id: 6, title: "Lists", icon: <BsCardList /> },
-  { id: 7, title: "Profile", icon: <AiOutlineUser /> },
-  { id: 8, title: "More", icon: <CgMoreO /> },
+  { id: 1, title: "Home", icon: <HomeIcon /> },
+  { id: 2, title: "Explore", icon: <TravelExploreIcon /> },
+  { id: 3, title: "Notifications", icon: <NotificationsNoneIcon /> },
+  { id: 4, title: "Messages", icon: <MessageIcon /> },
+  { id: 5, title: "Bookmarks", icon: <BookmarkBorderIcon /> },
+  { id: 6, title: "Lists", icon: <ListAltOutlinedIcon /> },
+  { id: 7, title: "Profile", icon: <AccountBoxIcon  /> },
+  { id: 8, title: "More", icon: <MoreHorizIcon /> },
 ];
 
 export default function Catorgries() {
-  const { count } = useUserContext();
   return (
     <Nav>
       <ul>
@@ -34,10 +35,7 @@ export default function Catorgries() {
           return title === "Home" ? (
             <li key={id}>
               <NavLink to={title.toLowerCase()}>
-                <span className="icon">
-                  {icon}
-                  <span className="count">{count.count}</span>
-                </span>
+                <span className="icon">{icon}</span>
                 <span className="title">{title}</span>
               </NavLink>
             </li>
