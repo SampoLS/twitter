@@ -1,13 +1,13 @@
+import React, { useState } from "react";
 import styled from "styled-components";
 
-import PermMediaOutlinedIcon from '@mui/icons-material/PermMediaOutlined';
-import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
-import PollOutlinedIcon from '@mui/icons-material/PollOutlined';
-import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined';
-import ScheduleOutlinedIcon from '@mui/icons-material/ScheduleOutlined';
-import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
+import GifBoxOutlinedIcon from "@mui/icons-material/GifBoxOutlined";
+import PollOutlinedIcon from "@mui/icons-material/PollOutlined";
+import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
+import ScheduleOutlinedIcon from "@mui/icons-material/ScheduleOutlined";
+import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 
-import { useState } from "react";
 import {
   useAddPostMutation,
   useGetPostsQuery,
@@ -16,16 +16,17 @@ import {
 import userLogo from "../../../assets/imgs/userlogo.jpg";
 
 const icons = [
-  { id: 1, icon: <PermMediaOutlinedIcon /> },
-  { id: 2, icon: <GifBoxOutlinedIcon /> },
-  { id: 3, icon: <PollOutlinedIcon /> },
-  { id: 4, icon: <SentimentSatisfiedOutlinedIcon /> },
-  { id: 5, icon: <ScheduleOutlinedIcon /> },
-  { id: 6, icon: <FmdGoodOutlinedIcon /> },
+  { id: 1, icon: <GifBoxOutlinedIcon /> },
+  { id: 2, icon: <PollOutlinedIcon /> },
+  { id: 3, icon: <SentimentSatisfiedOutlinedIcon /> },
+  { id: 4, icon: <ScheduleOutlinedIcon /> },
+  { id: 5, icon: <FmdGoodOutlinedIcon /> },
 ];
 
 export default function AddPost() {
   const [post, setPost] = useState("");
+  const [media, setMedia] = useState<string | null>();
+
   const [updatedPost] = useAddPostMutation();
   const { refetch } = useGetPostsQuery("");
 
@@ -38,9 +39,22 @@ export default function AddPost() {
       reply: Math.ceil(Math.random() + 4) * 21,
       retweet: Math.ceil(Math.random() + 10) * 48,
       favs: Math.ceil(Math.random() + 15) * 18,
+      imgUrl: media,
     });
     refetch();
     setPost("");
+    setMedia(null)
+  };
+
+  const onSetMedia = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    if (target) {
+      if (target.files) {
+        const file = target.files[0];
+        const path = URL.createObjectURL(file);
+        setMedia(path);
+      }
+    }
   };
 
   return (
@@ -50,20 +64,57 @@ export default function AddPost() {
           value={post}
           onChange={(e) => setPost(e.target.value)}
           placeholder="What's happening?"
-        ></textarea>
+        />
+        {media && (
+          <div
+            className="media-show-area"
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "5px",
+              overflow: "hidden",
+            }}
+          >
+            <img
+              src={media}
+              alt="image"
+              style={{ width: "100%", height: "100%" }}
+              onClick={() => setMedia(null)}
+            />
+          </div>
+        )}
       </form>
       <div className="reply">
         <span>Everyone can reply</span>
       </div>
       <Tweet>
-        <div className="icons">
-          {icons.map((item) => {
-            return (
-              <a href="/" key={item.id}>
-                {item.icon}
-              </a>
-            );
-          })}
+        <div style={{ display: "flex", cursor: "pointer" }}>
+          <div className="file-box">
+            <label htmlFor="file">
+              <PermMediaOutlinedIcon />
+            </label>
+            <input
+              type="file"
+              id="file"
+              accept="image/*"
+              onChange={(e) => onSetMedia(e)}
+            />
+          </div>
+          <div className="icons">
+            {icons.map((item) => {
+              return (
+                <div
+                  className="icon"
+                  key={item.id}
+                  onClick={() => {
+                    console.log("hello");
+                  }}
+                >
+                  {item.icon}
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div className="tweet">
           <button onClick={onTweetClick}>Tweet</button>
@@ -84,7 +135,7 @@ const Box = styled.div`
       border: none;
       resize: vertical;
       font-size: 1rem;
-      font-family: roboto
+      font-family: roboto;
     }
   }
   .reply {
@@ -105,11 +156,32 @@ const Tweet = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  a {
+
+  .file-box {
+    label {
+      color: dodgerblue;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    #file {
+      visibility: hidden;
+      position: fixed;
+      top: -9999px;
+    }
+  }
+  .icon {
     font-size: 1.3rem;
     color: dodgerblue;
     padding-right: 1rem;
   }
+
+  .icons {
+    margin-left: 1rem;
+    display: flex;
+  }
+
   button {
     border: none;
     outline: none;
