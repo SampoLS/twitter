@@ -32,7 +32,7 @@ export default function Home() {
           const { id, name, userId, contents, avatarUrl, imgUrl } = post;
 
           let width, height;
-          if (imgUrl) {
+          if (imgUrl && imgUrl.includes('/')) {
             const res = imgUrl.split("/")
             const imgSize = res[res.length - 1]
             const size = imgSize.split("x")

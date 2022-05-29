@@ -25,7 +25,7 @@ const icons = [
 
 export default function AddPost() {
   const [post, setPost] = useState("");
-  const [media, setMedia] = useState<string | null>();
+  const [path, setPath] = useState<string | null>();
 
   const [updatedPost] = useAddPostMutation();
   const { refetch } = useGetPostsQuery("");
@@ -39,11 +39,11 @@ export default function AddPost() {
       reply: Math.ceil(Math.random() + 4) * 21,
       retweet: Math.ceil(Math.random() + 10) * 48,
       favs: Math.ceil(Math.random() + 15) * 18,
-      imgUrl: media,
+      imgUrl: path,
     });
     refetch();
     setPost("");
-    setMedia(null)
+    setPath(null);
   };
 
   const onSetMedia = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,8 +51,12 @@ export default function AddPost() {
     if (target) {
       if (target.files) {
         const file = target.files[0];
-        const path = URL.createObjectURL(file);
-        setMedia(path);
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.addEventListener("load", (e: any) => {
+          // console.log(e.target.result) // Super long string
+          setPath(e.target.result); 
+        });
       }
     }
   };
@@ -65,7 +69,7 @@ export default function AddPost() {
           onChange={(e) => setPost(e.target.value)}
           placeholder="What's happening?"
         />
-        {media && (
+        {path && (
           <div
             className="media-show-area"
             style={{
@@ -76,10 +80,10 @@ export default function AddPost() {
             }}
           >
             <img
-              src={media}
+              src={path}
               alt="image"
               style={{ width: "100%", height: "100%" }}
-              onClick={() => setMedia(null)}
+              onClick={() => setPath(null)}
             />
           </div>
         )}
