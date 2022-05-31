@@ -54,7 +54,6 @@ export default function AddPost() {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.addEventListener("load", (e: any) => {
-          // console.log(e.target.result) // Super long string
           setPath(e.target.result); 
         });
       }
