@@ -3,7 +3,7 @@ import Page from "./layout/Page";
 import Explore from "./pages/explore/Explore";
 import Home from "./pages/home/Home";
 
-const App = () => {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -16,4 +16,3 @@ const App = () => {
     </BrowserRouter>
   );
 };
-export default App;
