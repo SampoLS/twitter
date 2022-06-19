@@ -10,7 +10,8 @@
       "retweet": 49,
       "favs": 63,
       "isLiked": true,
-      "imgUrl": "https://source.unsplash.com/random/400x500"
+      "imgUrl": "https://source.unsplash.com/random/400x500",
+      "postTime": "1-6-2022"
     },
     {
       "id": 2,
@@ -22,7 +23,8 @@
       "retweet": 249,
       "favs": 46,
       "isLiked": false,
-      "imgUrl": "https://source.unsplash.com/random/500x200"
+      "imgUrl": "https://source.unsplash.com/random/500x200",
+      "postTime": "1-6-2022"
     },
     {
       "id": 3,
@@ -34,7 +36,8 @@
       "retweet": 4032,
       "favs": 471,
       "isLiked": false,
-      "imgUrl": "https://source.unsplash.com/random/500x400"
+      "imgUrl": "https://source.unsplash.com/random/500x400",
+      "postTime": "1-6-2022"
     },
     {
       "id": 4,
@@ -46,17 +49,30 @@
       "retweet": 48,
       "favs": 21,
       "isLiked": true,
-      "imgUrl": "https://source.unsplash.com/random/400x400"
+      "imgUrl": "https://source.unsplash.com/random/400x400",
+      "postTime": "1-6-2022"
     },
     {
       "name": "tamelo",
       "userId": "mr_good_man",
-      "contents": "What a nice day",
+      "contents": "how are you",
       "avatarUrl": "/static/media/userlogo.996b25f654e922226f13.jpg",
       "reply": 105,
       "retweet": 528,
       "favs": 288,
+      "postTime": "13-6-2022",
       "id": 5
+    },
+    {
+      "name": "tamelo",
+      "userId": "mr_good_man",
+      "contents": "Life is boring, do some things you like",
+      "avatarUrl": "/static/media/userlogo.996b25f654e922226f13.jpg",
+      "reply": 105,
+      "retweet": 528,
+      "favs": 288,
+      "postTime": "14-6-2022",
+      "id": 6
     }
   ],
   "users": [

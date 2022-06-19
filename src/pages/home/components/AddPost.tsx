@@ -31,6 +31,12 @@ export default function AddPost() {
   const { refetch } = useGetPostsQuery("");
 
   const onTweetClick = async () => {
+    const time = new Date();
+    const date = time.getDate();
+    const month = time.getMonth() + 1;
+    const year = time.getFullYear();
+    const postTime = date + "-" + month + "-" + year;
+
     await updatedPost({
       name: "tamelo",
       userId: "mr_good_man",
@@ -40,6 +46,7 @@ export default function AddPost() {
       retweet: Math.ceil(Math.random() + 10) * 48,
       favs: Math.ceil(Math.random() + 15) * 18,
       imgUrl: path,
+      postTime,
     });
     refetch();
     setPost("");
@@ -54,7 +61,7 @@ export default function AddPost() {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.addEventListener("load", (e: any) => {
-          setPath(e.target.result); 
+          setPath(e.target.result);
         });
       }
     }
@@ -80,7 +87,7 @@ export default function AddPost() {
           >
             <img
               src={path}
-              alt="image"
+              alt="img"
               style={{ width: "100%", height: "100%" }}
               onClick={() => setPath(null)}
             />

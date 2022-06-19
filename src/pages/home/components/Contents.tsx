@@ -9,14 +9,15 @@ interface Props {
   width: string;
   height: string;
   userId: string;
+  postTime: string;
 }
 
 const Contents = (props: Props) => {
-  const { username, contents, imgUrl, width, height, userId } = props;
+  const { username, contents, imgUrl, width, height, userId, postTime } = props;
   return (
     <Box>
       <div className="user-box">
-        <h4>{username}</h4>
+        <Link to="/">{username}</Link>
         <div>
           <span className="icon">
             <svg viewBox="0 0 24 24" aria-label="Verified account">
@@ -30,7 +31,7 @@ const Contents = (props: Props) => {
         <div className="dot-wrapper">
           <span className="dot"></span>
         </div>
-        <div className="post-time">1h</div>
+        <div className="post-time">{postTime}</div>
       </div>
       <div className="contents">
         <Link to={`${username}`}>
@@ -59,10 +60,13 @@ const Box = styled.div`
     display: flex;
     align-items: center;
 
-    h4 {
+    a {
       font-size: 0.9rem;
       font-family: roboto;
       font-weight: bold;
+      &:hover {
+        border-bottom: 2px solid black;
+      }
     }
 
     .icon {

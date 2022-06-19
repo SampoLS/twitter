@@ -29,7 +29,7 @@ export default function Home() {
       </Postarea>
       {posts ? (
         posts.map((post: any) => {
-          const { id, name, userId, contents, avatarUrl, imgUrl } = post;
+          const { id, name, userId, contents, avatarUrl, imgUrl, postTime } = post;
 
           let width, height;
           if (imgUrl && imgUrl.includes('/')) {
@@ -53,6 +53,7 @@ export default function Home() {
                     width={width}
                     height={height}
                     userId={userId}
+                    postTime={postTime}
                   />
                   <PostTraits post={post} />
                 </article>
