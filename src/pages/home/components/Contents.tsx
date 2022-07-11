@@ -1,6 +1,7 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import PopupWhenHoverAboveUser from "./PopupWhenHoverAboveUser";
 
 interface Props {
   username: string;
@@ -10,14 +11,68 @@ interface Props {
   height: string;
   userId: string;
   postTime: string;
+  idx: number;
 }
 
 const Contents = (props: Props) => {
-  const { username, contents, imgUrl, width, height, userId, postTime } = props;
+  const { username, contents, imgUrl, width, height, userId, postTime, idx } =
+    props;
+
+  const [isShow, setIsShow] = useState(false);
+
+  let id: ReturnType<typeof setTimeout>;
+
+  const showPopup = (idx: number) => {
+    const userBox = document.getElementsByClassName("user-box");
+
+    for (let i = 0; i < userBox.length; i++) {
+      if (i === idx) {
+        setTimeout(() => {
+          setIsShow(true);
+        }, 500);
+        /*
+        setTimeout(() => {
+          const article = document.createElement("article");
+          article.className = "popup";
+          article.textContent = username;
+          userBox[i].appendChild(article);
+          article.addEventListener("mouseover", () => {
+            clearTimeout(id);
+          });
+          article.addEventListener("mouseleave", () => {
+            const popup = document.querySelector(".popup") as HTMLElement;
+            userBox[i].removeChild(popup);
+          });
+        }, 500);
+        */
+      }
+    }
+  };
+  const hidePopup = (idx: number) => {
+    const userBox = document.getElementsByClassName("user-box");
+    for (let i = 0; i < userBox.length; i++) {
+      if (i === idx) {
+        id = setTimeout(() => {
+          setIsShow(false);
+        }, 600);
+        // id = setTimeout(() => {
+        //   const popup = document.querySelector(".popup") as HTMLElement;
+        //   userBox[i].removeChild(popup);
+        // }, 600);
+      }
+    }
+  };
   return (
     <Box>
       <div className="user-box">
-        <Link to="/">{username}</Link>
+        <Link
+          to="/"
+          className="username"
+          onMouseOver={() => showPopup(idx)}
+          onMouseLeave={() => hidePopup(idx)}
+        >
+          {username}
+        </Link>
         <div>
           <span className="icon">
             <svg viewBox="0 0 24 24" aria-label="Verified account">
@@ -33,6 +88,8 @@ const Contents = (props: Props) => {
         </div>
         <div className="post-time">{postTime}</div>
       </div>
+
+      {isShow ? <PopupWhenHoverAboveUser username={username} /> : null}
       <div className="contents">
         <Link to={`${username}`}>
           <p>{contents ? contents : "loading..."}</p>
@@ -59,8 +116,13 @@ const Box = styled.div`
   .user-box {
     display: flex;
     align-items: center;
+    position: relative;
+    &:hover {
+      cursor: pointer;
+    }
 
     a {
+      height: 18px;
       font-size: 0.9rem;
       font-family: roboto;
       font-weight: bold;

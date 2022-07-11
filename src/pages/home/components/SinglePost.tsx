@@ -10,6 +10,6 @@ const Box = styled.section`
   border-bottom: 1px solid #eee;
   transition: all 70ms linear;
   &:hover {
-    background: #F6F6F6;
+    background: #f6f6f6;
   }
 `;
