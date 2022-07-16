@@ -18,6 +18,7 @@ const ImgBox = styled.div`
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
+  position: relative;
   img {
     width: inherit;
     height: inherit;

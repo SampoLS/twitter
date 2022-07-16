@@ -8,10 +8,12 @@
       "avatarUrl": "https://source.unsplash.com/random/50x60",
       "reply": 10,
       "retweet": 49,
-      "favs": 63,
+      "favs": 64,
       "isLiked": true,
       "imgUrl": "https://source.unsplash.com/random/400x500",
-      "postTime": "1-6-2022"
+      "postTime": "1-6-2022",
+      "followers": 40,
+      "following": 5
     },
     {
       "id": 2,
@@ -24,7 +26,9 @@
       "favs": 47,
       "isLiked": true,
       "imgUrl": "https://source.unsplash.com/random/500x200",
-      "postTime": "1-6-2022"
+      "postTime": "1-6-2022",
+      "followers": 1030,
+      "following": 20
     },
     {
       "id": 3,
@@ -37,7 +41,9 @@
       "favs": 471,
       "isLiked": false,
       "imgUrl": "https://source.unsplash.com/random/500x400",
-      "postTime": "1-6-2022"
+      "postTime": "1-6-2022",
+      "followers": 980,
+      "following": 50
     },
     {
       "id": 4,
@@ -50,29 +56,9 @@
       "favs": 21,
       "isLiked": true,
       "imgUrl": "https://source.unsplash.com/random/400x400",
-      "postTime": "1-6-2022"
-    },
-    {
-      "name": "tamelo",
-      "userId": "mr_good_man",
-      "contents": "how are you",
-      "avatarUrl": "/static/media/userlogo.996b25f654e922226f13.jpg",
-      "reply": 105,
-      "retweet": 528,
-      "favs": 288,
-      "postTime": "13-6-2022",
-      "id": 5
-    },
-    {
-      "name": "tamelo",
-      "userId": "mr_good_man",
-      "contents": "Life is boring, do some things you like",
-      "avatarUrl": "/static/media/userlogo.996b25f654e922226f13.jpg",
-      "reply": 105,
-      "retweet": 528,
-      "favs": 288,
-      "postTime": "14-6-2022",
-      "id": 6
+      "postTime": "1-6-2022",
+      "followers": 20,
+      "following": 500
     }
   ],
   "users": [

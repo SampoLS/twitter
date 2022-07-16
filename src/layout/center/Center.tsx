@@ -10,5 +10,4 @@ const Main = styled.main`
   width: 47%;
   position: absolute;
   margin-left: 23%;
-  // overflow: hidden;
 `;

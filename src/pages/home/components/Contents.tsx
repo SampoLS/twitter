@@ -2,34 +2,48 @@ import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PopupWhenHoverAboveUser from "./PopupWhenHoverAboveUser";
+import Reply from "../../users/Reply";
 
 interface Props {
-  username: string;
-  contents: string;
-  imgUrl: string;
-  width: string;
-  height: string;
-  userId: string;
-  postTime: string;
-  idx: number;
+  single: {
+    name: string;
+    contents: string;
+    imgUrl: string;
+    avatarUrl: string;
+    userId: string;
+    postTime: string;
+    id: number;
+    following: number;
+    followers: number;
+  };
+  width?: string;
+  height?: string;
 }
 
 const Contents = (props: Props) => {
-  const { username, contents, imgUrl, width, height, userId, postTime, idx } =
-    props;
+  const {
+    name,
+    contents,
+    imgUrl,
+    avatarUrl,
+    userId,
+    postTime,
+    id,
+    followers,
+    following,
+  } = props.single;
+  const { width, height } = props;
 
   const [isShow, setIsShow] = useState(false);
 
-  let id: ReturnType<typeof setTimeout>;
+  // let id: ReturnType<typeof setTimeout>;
 
-  const showPopup = (idx: number) => {
+  const showPopup = (id: number) => {
     const userBox = document.getElementsByClassName("user-box");
 
-    for (let i = 0; i < userBox.length; i++) {
-      if (i === idx) {
-        setTimeout(() => {
-          setIsShow(true);
-        }, 500);
+    for (let i = 0; i < userBox.length + 1; i++) {
+      if (i === id) {
+        setIsShow(true);
         /*
         setTimeout(() => {
           const article = document.createElement("article");
@@ -48,13 +62,11 @@ const Contents = (props: Props) => {
       }
     }
   };
-  const hidePopup = (idx: number) => {
+  const hidePopup = (id: number) => {
     const userBox = document.getElementsByClassName("user-box");
-    for (let i = 0; i < userBox.length; i++) {
-      if (i === idx) {
-        id = setTimeout(() => {
-          setIsShow(false);
-        }, 600);
+    for (let i = 0; i < userBox.length + 1; i++) {
+      if (i === id) {
+        setIsShow(false);
         // id = setTimeout(() => {
         //   const popup = document.querySelector(".popup") as HTMLElement;
         //   userBox[i].removeChild(popup);
@@ -66,12 +78,12 @@ const Contents = (props: Props) => {
     <Box>
       <div className="user-box">
         <Link
-          to="/"
+          to={`/${userId}`}
           className="username"
-          onMouseOver={() => showPopup(idx)}
-          onMouseLeave={() => hidePopup(idx)}
+          onMouseOver={() => showPopup(id)}
+          onMouseLeave={() => hidePopup(id)}
         >
-          {username}
+          {name}
         </Link>
         <div>
           <span className="icon">
@@ -89,9 +101,17 @@ const Contents = (props: Props) => {
         <div className="post-time">{postTime}</div>
       </div>
 
-      {isShow ? <PopupWhenHoverAboveUser username={username} /> : null}
+      {isShow ? (
+        <PopupWhenHoverAboveUser
+          name={name}
+          avatarUrl={avatarUrl}
+          followers={followers}
+          following={following}
+        />
+      ) : null}
+      <Reply single={props.single} />
       <div className="contents">
-        <Link to={`${username}`}>
+        <Link to={`${name}`}>
           <p>{contents ? contents : "loading..."}</p>
           {imgUrl && (
             <div

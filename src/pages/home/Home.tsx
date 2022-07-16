@@ -15,6 +15,8 @@ import Position from "./components/Position";
 
 import { useGetPostsQuery } from "../../service/postsApi";
 
+import { getImgSize } from "../../utils/getImgSize";
+
 export default function Home() {
   const { data: posts } = useGetPostsQuery("");
 
@@ -28,17 +30,15 @@ export default function Home() {
         </AuthorPost>
       </Postarea>
       {posts ? (
-        posts.map((post: any, idx: number) => {
-          const { id, name, userId, contents, avatarUrl, imgUrl, postTime } =
-            post;
+        posts.map((post: any) => {
+          const { id, avatarUrl, imgUrl } = post;
 
-          let width, height;
-          if (imgUrl && imgUrl.includes("/")) {
-            const res = imgUrl.split("/");
-            const imgSize = res[res.length - 1];
-            const size = imgSize.split("x");
-            width = size[0];
-            height = size[1];
+          let width: string = '';
+          let height: string = '';
+          if (imgUrl) {
+            const imgSize = getImgSize(imgUrl);
+            width = imgSize!.width;
+            height = imgSize!.height;
           }
 
           return (
@@ -47,16 +47,7 @@ export default function Home() {
               <div style={{ display: "flex" }}>
                 <Avatar imgUrl={avatarUrl} />
                 <article style={{ flex: 1, position: "relative" }}>
-                  <Contents
-                    username={name}
-                    contents={contents}
-                    imgUrl={imgUrl}
-                    width={width}
-                    height={height}
-                    userId={userId}
-                    postTime={postTime}
-                    idx={idx}
-                  />
+                  <Contents single={post} width={width} height={height} />
                   <PostTraits post={post} />
                 </article>
               </div>

@@ -24,7 +24,6 @@ const PostTraits = ({ post }: Props) => {
   const [updatedPost] = useUpdatePostMutation()
   const { refetch } = useGetPostsQuery("")
 
-
   const handleClick = async () => {
     if (!isFavs) {
       favs += 1;
