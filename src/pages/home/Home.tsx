@@ -30,7 +30,7 @@ export default function Home() {
         </AuthorPost>
       </Postarea>
       {posts ? (
-        posts.map((post: any) => {
+        posts.map((post: any, idx: number) => {
           const { id, avatarUrl, imgUrl } = post;
 
           let width: string = '';
@@ -47,7 +47,7 @@ export default function Home() {
               <div style={{ display: "flex" }}>
                 <Avatar imgUrl={avatarUrl} />
                 <article style={{ flex: 1, position: "relative" }}>
-                  <Contents single={post} width={width} height={height} />
+                  <Contents single={post} idx={idx} width={width} height={height} />
                   <PostTraits post={post} />
                 </article>
               </div>

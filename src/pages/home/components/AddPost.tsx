@@ -1,27 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
-import GifBoxOutlinedIcon from "@mui/icons-material/GifBoxOutlined";
-import PollOutlinedIcon from "@mui/icons-material/PollOutlined";
-import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
-import ScheduleOutlinedIcon from "@mui/icons-material/ScheduleOutlined";
-import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
+import Tweet from "../../../components/Button";
 
 import {
   useAddPostMutation,
   useGetPostsQuery,
 } from "../../../service/postsApi";
 
-import userLogo from "../../../assets/imgs/userlogo.jpg";
+import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
 
-const icons = [
-  { id: 1, icon: <GifBoxOutlinedIcon /> },
-  { id: 2, icon: <PollOutlinedIcon /> },
-  { id: 3, icon: <SentimentSatisfiedOutlinedIcon /> },
-  { id: 4, icon: <ScheduleOutlinedIcon /> },
-  { id: 5, icon: <FmdGoodOutlinedIcon /> },
-];
+import userLogo from "../../../assets/imgs/userlogo.jpg";
+import Icons from "../../../components/Icons";
+import Text from "../../../components/Text";
 
 export default function AddPost() {
   const [post, setPost] = useState("");
@@ -30,7 +21,7 @@ export default function AddPost() {
   const [updatedPost] = useAddPostMutation();
   const { refetch } = useGetPostsQuery("");
 
-  const onTweetClick = async () => {
+  const addPost = async () => {
     const time = new Date();
     const date = time.getDate();
     const month = time.getMonth() + 1;
@@ -53,7 +44,7 @@ export default function AddPost() {
     setPath(null);
   };
 
-  const onSetMedia = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onUploadImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     if (target) {
       if (target.files) {
@@ -70,11 +61,7 @@ export default function AddPost() {
   return (
     <Box>
       <form>
-        <textarea
-          value={post}
-          onChange={(e) => setPost(e.target.value)}
-          placeholder="What's happening?"
-        />
+        <Text post={post} setPost={setPost} text="What's happening?" />
         {path && (
           <div
             className="media-show-area"
@@ -97,7 +84,7 @@ export default function AddPost() {
       <div className="reply">
         <span>Everyone can reply</span>
       </div>
-      <Tweet>
+      <ToolKitBox>
         <div style={{ display: "flex", cursor: "pointer" }}>
           <div className="file-box">
             <label htmlFor="file">
@@ -107,29 +94,13 @@ export default function AddPost() {
               type="file"
               id="file"
               accept="image/*"
-              onChange={(e) => onSetMedia(e)}
+              onChange={(e) => onUploadImg(e)}
             />
           </div>
-          <div className="icons">
-            {icons.map((item) => {
-              return (
-                <div
-                  className="icon"
-                  key={item.id}
-                  onClick={() => {
-                    console.log("hello");
-                  }}
-                >
-                  {item.icon}
-                </div>
-              );
-            })}
-          </div>
+          <Icons />
         </div>
-        <div className="tweet">
-          <button onClick={onTweetClick}>Tweet</button>
-        </div>
-      </Tweet>
+        <Tweet onHandleClick={addPost} post={post} />
+      </ToolKitBox>
     </Box>
   );
 }
@@ -138,15 +109,6 @@ const Box = styled.div`
   flex: 1;
   form {
     padding-left: 1rem;
-    textarea {
-      width: 100%;
-      min-height: 50px;
-      outline: none;
-      border: none;
-      resize: vertical;
-      font-size: 1rem;
-      font-family: roboto;
-    }
   }
   .reply {
     border-bottom: 1px solid #eee;
@@ -159,7 +121,7 @@ const Box = styled.div`
   }
 `;
 
-const Tweet = styled.div`
+const ToolKitBox = styled.div`
   padding-left: 1rem;
   width: inherit;
   height: 70px;
@@ -181,24 +143,9 @@ const Tweet = styled.div`
       top: -9999px;
     }
   }
-  .icon {
-    font-size: 1.3rem;
-    color: dodgerblue;
-    padding-right: 1rem;
-  }
 
   .icons {
     margin-left: 1rem;
     display: flex;
-  }
-
-  button {
-    border: none;
-    outline: none;
-    padding: 10px 20px;
-    background: dodgerblue;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
   }
 `;

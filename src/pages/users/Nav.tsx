@@ -30,9 +30,9 @@ const Section = styled.section`
   font-family: roboto;
   font-size: 15px;
   a {
-    color: #666;
+    color: #777;
   }
   .active {
-    color: red;
+    color: black;
   }
 `;

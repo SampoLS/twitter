@@ -2,15 +2,30 @@ import styled from "styled-components";
 
 interface Props {
   name: string;
+  idx: number;
   avatarUrl: string;
   following: number;
   followers: number;
+  setIsShow: (b: boolean) => void;
+  timeId: ReturnType<typeof setTimeout>
 }
 
 export default function PopupWhenHoverAboveUser(props: Props) {
-  const { name, avatarUrl, following, followers } = props;
+  const { name, avatarUrl, following, followers, setIsShow, timeId } = props;
+
+  const show = () => {
+    setIsShow(true);
+    clearTimeout(timeId)
+  }
+
+  const hide = () => {
+    setTimeout(() => {
+      setIsShow(false);
+    }, 500);
+  }
+
   return (
-    <Article className="popup">
+    <Article className="popup" onMouseEnter={show} onMouseLeave={hide}>
       <section className='top'>
         <div>
           <div className='img-box'>

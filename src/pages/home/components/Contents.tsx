@@ -2,7 +2,7 @@ import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PopupWhenHoverAboveUser from "./PopupWhenHoverAboveUser";
-import Reply from "../../users/Reply";
+import ReplyPopup from "../../users/ReplyPopup";
 
 interface Props {
   single: {
@@ -16,11 +16,12 @@ interface Props {
     following: number;
     followers: number;
   };
+  idx?: number;
   width?: string;
   height?: string;
 }
 
-const Contents = (props: Props) => {
+function Contents (props: Props) {
   const {
     name,
     contents,
@@ -32,56 +33,36 @@ const Contents = (props: Props) => {
     followers,
     following,
   } = props.single;
-  const { width, height } = props;
+  const { width, height, idx } = props;
 
   const [isShow, setIsShow] = useState(false);
+  const [timeId, setTimeId] = useState<any>();
 
-  // let id: ReturnType<typeof setTimeout>;
+  let t: ReturnType<typeof setTimeout>;
 
-  const showPopup = (id: number) => {
-    const userBox = document.getElementsByClassName("user-box");
-
-    for (let i = 0; i < userBox.length + 1; i++) {
-      if (i === id) {
-        setIsShow(true);
-        /*
-        setTimeout(() => {
-          const article = document.createElement("article");
-          article.className = "popup";
-          article.textContent = username;
-          userBox[i].appendChild(article);
-          article.addEventListener("mouseover", () => {
-            clearTimeout(id);
-          });
-          article.addEventListener("mouseleave", () => {
-            const popup = document.querySelector(".popup") as HTMLElement;
-            userBox[i].removeChild(popup);
-          });
-        }, 500);
-        */
-      }
+  const showPopup = () => {
+    if (timeId) {
+      clearTimeout(timeId)
     }
+    setIsShow(true)
   };
-  const hidePopup = (id: number) => {
-    const userBox = document.getElementsByClassName("user-box");
-    for (let i = 0; i < userBox.length + 1; i++) {
-      if (i === id) {
-        setIsShow(false);
-        // id = setTimeout(() => {
-        //   const popup = document.querySelector(".popup") as HTMLElement;
-        //   userBox[i].removeChild(popup);
-        // }, 600);
-      }
-    }
+
+  const hidePopup = () => {
+    t = setTimeout(() => {
+      setIsShow(false)
+    }, 500)
+
+    setTimeId(t);
   };
+
   return (
     <Box>
       <div className="user-box">
         <Link
           to={`/${userId}`}
           className="username"
-          onMouseOver={() => showPopup(id)}
-          onMouseLeave={() => hidePopup(id)}
+          onMouseEnter={showPopup}
+          onMouseLeave={hidePopup}
         >
           {name}
         </Link>
@@ -100,16 +81,17 @@ const Contents = (props: Props) => {
         </div>
         <div className="post-time">{postTime}</div>
       </div>
-
       {isShow ? (
         <PopupWhenHoverAboveUser
           name={name}
           avatarUrl={avatarUrl}
           followers={followers}
           following={following}
-        />
-      ) : null}
-      <Reply single={props.single} />
+          idx={idx!}
+          setIsShow={setIsShow}
+          timeId={timeId}
+        />) : null}
+      <ReplyPopup single={props.single} id={id} />
       <div className="contents">
         <Link to={`${name}`}>
           <p>{contents ? contents : "loading..."}</p>
@@ -132,6 +114,7 @@ export default memo(Contents);
 const Box = styled.div`
   flex: 1;
   padding-left: 1rem;
+  position: relative;
 
   .user-box {
     display: flex;
@@ -199,6 +182,10 @@ const Box = styled.div`
       border-radius: 5px;
       overflow: hidden;
       margin-top: 1.5rem;
+    }
+
+    p {
+      white-space: pre-wrap;
     }
   }
 `;
