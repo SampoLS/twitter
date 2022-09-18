@@ -25,7 +25,7 @@ export default function Home() {
       <Title />
       <Postarea>
         <AuthorPost>
-          <Avatar imgUrl={imgUrl} />
+          {/*<Avatar imgUrl={imgUrl} />*/}
           <AddPost />
         </AuthorPost>
       </Postarea>
@@ -33,8 +33,8 @@ export default function Home() {
         posts.map((post: any, idx: number) => {
           const { id, avatarUrl, imgUrl } = post;
 
-          let width: string = '';
-          let height: string = '';
+          let width: string = "";
+          let height: string = "";
           if (imgUrl) {
             const imgSize = getImgSize(imgUrl);
             width = imgSize!.width;
@@ -45,9 +45,14 @@ export default function Home() {
             <SinglePost key={id}>
               <Position />
               <div style={{ display: "flex" }}>
-                <Avatar imgUrl={avatarUrl} />
+                <Avatar post={post} idx={idx} />
                 <article style={{ flex: 1, position: "relative" }}>
-                  <Contents single={post} idx={idx} width={width} height={height} />
+                  <Contents
+                    single={post}
+                    idx={idx}
+                    width={width}
+                    height={height}
+                  />
                   <PostTraits post={post} />
                 </article>
               </div>

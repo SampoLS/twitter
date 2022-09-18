@@ -21,7 +21,7 @@ interface Props {
   height?: string;
 }
 
-function Contents (props: Props) {
+function Contents(props: Props) {
   const {
     name,
     contents,
@@ -36,21 +36,21 @@ function Contents (props: Props) {
   const { width, height, idx } = props;
 
   const [isShow, setIsShow] = useState(false);
-  const [timeId, setTimeId] = useState<any>();
+  const [timeId, setTimeId] = useState<ReturnType<typeof setTimeout>>();
 
   let t: ReturnType<typeof setTimeout>;
 
   const showPopup = () => {
-    if (timeId) {
-      clearTimeout(timeId)
-    }
-    setIsShow(true)
+    if (timeId) clearTimeout(timeId);
+    setTimeout(() => {
+      setIsShow(true);
+    }, 500);
   };
 
   const hidePopup = () => {
     t = setTimeout(() => {
-      setIsShow(false)
-    }, 500)
+      setIsShow(false);
+    }, 500);
 
     setTimeId(t);
   };
@@ -81,16 +81,16 @@ function Contents (props: Props) {
         </div>
         <div className="post-time">{postTime}</div>
       </div>
-      {isShow ? (
-        <PopupWhenHoverAboveUser
-          name={name}
-          avatarUrl={avatarUrl}
-          followers={followers}
-          following={following}
-          idx={idx!}
-          setIsShow={setIsShow}
-          timeId={timeId}
-        />) : null}
+      <PopupWhenHoverAboveUser
+        name={name}
+        avatarUrl={avatarUrl}
+        followers={followers}
+        following={following}
+        idx={idx!}
+        setIsShow={setIsShow}
+        timeId={timeId}
+        isShow={isShow}
+      />
       <ReplyPopup single={props.single} id={id} />
       <div className="contents">
         <Link to={`${name}`}>
@@ -107,7 +107,7 @@ function Contents (props: Props) {
       </div>
     </Box>
   );
-};
+}
 
 export default memo(Contents);
 

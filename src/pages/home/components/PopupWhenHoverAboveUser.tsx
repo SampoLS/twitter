@@ -6,43 +6,56 @@ interface Props {
   avatarUrl: string;
   following: number;
   followers: number;
-  setIsShow: (b: boolean) => void;
-  timeId: ReturnType<typeof setTimeout>
+  isShow: boolean;
+  setIsShow?: (b: boolean) => void;
+  timeId?: ReturnType<typeof setTimeout>;
 }
 
 export default function PopupWhenHoverAboveUser(props: Props) {
-  const { name, avatarUrl, following, followers, setIsShow, timeId } = props;
+  const { name, avatarUrl, isShow, following, followers, setIsShow, timeId } =
+    props;
 
-  const show = () => {
-    setIsShow(true);
-    clearTimeout(timeId)
-  }
-
-  const hide = () => {
+  const showPopup = () => {
     setTimeout(() => {
-      setIsShow(false);
+      setIsShow!(true);
     }, 500);
-  }
+    clearTimeout(timeId!);
+  };
+
+  const hidePopup = () => {
+    setTimeout(() => {
+      setIsShow!(false);
+    }, 500);
+  };
 
   return (
-    <Article className="popup" onMouseEnter={show} onMouseLeave={hide}>
-      <section className='top'>
+    <Article
+      className="popup"
+      style={{
+        display: isShow ? "block" : "none",
+      }}
+      onMouseEnter={showPopup}
+      onMouseLeave={hidePopup}
+    >
+      <section className="top">
         <div>
-          <div className='img-box'>
+          <div className="img-box">
             <img src={avatarUrl} alt="logo" />
           </div>
-          <div className='username'>{name}</div>
-          <div className='account'>@{name}</div>
+          <div className="username">{name}</div>
+          <div className="account">@{name}</div>
         </div>
-        <div className='follow'>follow</div>
+        <div className="follow">follow</div>
       </section>
-      <section className='details'>life is boring, do somethings you like</section>
-      <section className='follower-box'>
-        <div className='followers'>
-          {followers} <span className='f-box'> followers</span>
+      <section className="details">
+        life is boring, do somethings you like
+      </section>
+      <section className="follower-box">
+        <div className="followers">
+          {followers} <span className="f-box"> followers</span>
         </div>
-        <div className='following'>
-          {following} <span className='f-box'> following</span>
+        <div className="following">
+          {following} <span className="f-box"> following</span>
         </div>
       </section>
     </Article>
@@ -50,16 +63,17 @@ export default function PopupWhenHoverAboveUser(props: Props) {
 }
 
 const Article = styled.article`
-  position: absolute;
-  top: 30px;
-  left: -120px;
   width: 300px;
   height: 270px;
+  padding: 20px 30px;
+  border-radius: 20px;
   background: white;
   box-shadow: 0 0 3px #ddd;
-  border-radius: 20px;
-  transition: all linear 150ms;
-  padding: 20px 30px;
+  position: absolute;
+  top: 60px;
+  left: -120px;
+  z-index: 10;
+
   .top {
     display: flex;
     justify-content: space-between;
@@ -72,6 +86,9 @@ const Article = styled.article`
       text-align: center;
       line-height: 30px;
       border-radius: 20px;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
   .img-box {
@@ -82,7 +99,7 @@ const Article = styled.article`
 
     img {
       width: 100%;
-      height: 100%
+      height: 100%;
     }
   }
 
@@ -99,7 +116,7 @@ const Article = styled.article`
   }
 
   .details {
-    margin-top: 20px
+    margin-top: 20px;
   }
 
   .f-box {
@@ -111,7 +128,7 @@ const Article = styled.article`
     font-family: roboto;
     display: flex;
     .following {
-      margin-left: 20px
+      margin-left: 20px;
     }
   }
 `;
