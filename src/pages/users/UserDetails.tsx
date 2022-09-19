@@ -7,12 +7,14 @@ import Nav from "./Nav";
 export default function UserDetails() {
   const params = useParams();
   const { data: info } = useGetPostsQuery("");
+  
   let person: any = [];
   if (info) {
     person = info.filter((p: any) => {
       return p.userId === params.userId;
     });
   }
+
   return (
     <Main>
       {person.length !== 0 ? (

@@ -44,15 +44,14 @@ function Contents(props: Props) {
     if (timeId) clearTimeout(timeId);
     setTimeout(() => {
       setIsShow(true);
-    }, 500);
+    }, 100);
   };
 
   const hidePopup = () => {
     t = setTimeout(() => {
       setIsShow(false);
     }, 500);
-
-    setTimeId(t);
+    setTimeId(t)
   };
 
   return (
@@ -81,17 +80,6 @@ function Contents(props: Props) {
         </div>
         <div className="post-time">{postTime}</div>
       </div>
-      <PopupWhenHoverAboveUser
-        name={name}
-        avatarUrl={avatarUrl}
-        followers={followers}
-        following={following}
-        idx={idx!}
-        setIsShow={setIsShow}
-        timeId={timeId}
-        isShow={isShow}
-      />
-      <ReplyPopup single={props.single} id={id} />
       <div className="contents">
         <Link to={`${name}`}>
           <p>{contents ? contents : "loading..."}</p>
@@ -105,6 +93,17 @@ function Contents(props: Props) {
           )}
         </Link>
       </div>
+      <PopupWhenHoverAboveUser
+        name={name}
+        avatarUrl={avatarUrl}
+        followers={followers}
+        following={following}
+        idx={idx!}
+        setIsShow={setIsShow}
+        timeId={timeId}
+        isShow={isShow}
+      />
+      <ReplyPopup single={props.single} id={id} idx={idx} />
     </Box>
   );
 }
