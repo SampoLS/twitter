@@ -1,4 +1,5 @@
-import { Outlet } from "react-router-dom";
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from "react-router-dom";
 
 import Layout from "./Layout";
 import Catorgries from "./left/components/Catogries";
@@ -11,6 +12,12 @@ import Logo from "./left/components/Logo";
 import Search from "./right/Search"
 
 export default function Page() {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    navigate('/home');
+  }, []);
+
   return (
     <Layout>
       <Left>

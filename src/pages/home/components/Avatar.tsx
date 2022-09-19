@@ -26,13 +26,13 @@ const Avatar = (props: Post) => {
   const showPopup = () => {
     setTimeout(() => {
       setIsShow(true);
-    }, 500)
+    }, 100)
   }
 
   const hidePopup = () => {
     t = setTimeout(() => {
       setIsShow(false);
-    }, 500);
+    }, 100);
     setTimeId(t)
   }
 

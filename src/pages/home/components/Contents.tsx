@@ -50,7 +50,7 @@ function Contents(props: Props) {
   const hidePopup = () => {
     t = setTimeout(() => {
       setIsShow(false);
-    }, 500);
+    }, 100);
     setTimeId(t)
   };
 

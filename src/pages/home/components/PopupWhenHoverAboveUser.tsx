@@ -18,14 +18,14 @@ export default function PopupWhenHoverAboveUser(props: Props) {
   const showPopup = () => {
     setTimeout(() => {
       setIsShow!(true);
-    }, 500);
+    }, 100);
     clearTimeout(timeId!);
   };
 
   const hidePopup = () => {
     setTimeout(() => {
       setIsShow!(false);
-    }, 500);
+    }, 100);
   };
 
   return (

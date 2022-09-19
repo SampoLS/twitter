@@ -17,10 +17,7 @@ export default function ReplyPopup({ single, idx }: any) {
   const closePopup = (idx: number) => {
     const popup = document.querySelectorAll(".reply-box");
     for (let i = 0; i < popup.length; i++) {
-      if (i === idx) {
-        (popup[i] as HTMLElement).style.display = "none";
-        console.log('closed')
-      }
+      if (i === idx) (popup[i] as HTMLElement).style.display = "none";
     }
   };
 
