@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import styled from "styled-components";
 
 import { useGetPostsQuery } from "../../service/postsApi";
@@ -7,7 +7,7 @@ import Text from "../../components/Text";
 import Icons from "../../components/Icons";
 import Reply from "../../components/Button";
 
-export default function ReplyPopup({ single, idx }: any) {
+function ReplyPopup({ single, idx }: any) {
   const { data: posts } = useGetPostsQuery("");
   const [post, setPost] = useState("");
 
@@ -24,7 +24,9 @@ export default function ReplyPopup({ single, idx }: any) {
   return (
     <Section className="reply-box">
       <div>
-        <span className="close" onClick={() => closePopup(idx)}>X</span>
+        <span className="close" onClick={() => closePopup(idx)}>
+          X
+        </span>
       </div>
       <div className="box">
         <div className="avatar">
@@ -54,6 +56,8 @@ export default function ReplyPopup({ single, idx }: any) {
     </Section>
   );
 }
+
+export default memo(ReplyPopup);
 
 const Section = styled.section`
   width: 550px;

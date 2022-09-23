@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from "styled-components";
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
   timeId?: ReturnType<typeof setTimeout>;
 }
 
-export default function PopupWhenHoverAboveUser(props: Props) {
+function PopupWhenHoverAboveUser(props: Props) {
   const { name, avatarUrl, isShow, following, followers, setIsShow, timeId } =
     props;
 
@@ -61,6 +62,8 @@ export default function PopupWhenHoverAboveUser(props: Props) {
     </Article>
   );
 }
+
+export default memo(PopupWhenHoverAboveUser);
 
 const Article = styled.article`
   width: 300px;

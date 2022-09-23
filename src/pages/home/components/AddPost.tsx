@@ -46,15 +46,20 @@ export default function AddPost() {
 
   const onUploadImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
-    if (target) {
-      if (target.files) {
-        const file = target.files[0];
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
-        fileReader.addEventListener("load", (e: any) => {
-          setPath(e.target.result);
-        });
-      }
+    /*const file = document.getElementById('file') as HTMLInputElement;
+    if (file.files) {
+      const path = URL.createObjectURL(file.files[0]);
+      setPath(path);
+      // URL.revokeObjectURL(path)
+    }
+    */
+    if (target.files) {
+      const file = target.files[0];
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.addEventListener("load", (e: any) => {
+        setPath(e.target.result);
+      });
     }
   };
 
