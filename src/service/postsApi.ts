@@ -9,6 +9,9 @@ export const api = createApi({
     getPosts: builder.query({
       query: () => `/posts`,
     }),
+    getHappens: builder.query({
+      query: () => `/happens`,
+    }),
     addPost: builder.mutation({
       query: (body) => {
         return {
@@ -37,5 +40,6 @@ export const {
   useGetPostsQuery,
   useAddPostMutation,
   useUpdatePostMutation,
-  useGetUserQuery
+  useGetUserQuery,
+  useGetHappensQuery
 } = api;

@@ -175,6 +175,9 @@ const Box = styled.div`
 
   .contents {
     padding-top: 0.5rem;
+    a:hover {
+      color: black;
+    }
 
     .media-box {
       border: 1px solid #eee;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import Layout from "./Layout";
@@ -9,13 +9,14 @@ import Right from "./right/Right";
 import Post from "./left/components/Post";
 import User from "./left/components/User";
 import Logo from "./left/components/Logo";
-import Search from "./right/Search"
+import Search from "./right/Search";
+import WhatHappens from "./right/WhatHappens";
 
 export default function Page() {
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    navigate('/home');
+    navigate("/home");
   }, []);
 
   return (
@@ -31,6 +32,7 @@ export default function Page() {
       </Center>
       <Right>
         <Search />
+        <WhatHappens />
       </Right>
     </Layout>
   );

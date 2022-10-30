@@ -6,6 +6,8 @@ import Home from "./pages/home/Home";
 import UserDetails from "./pages/users/UserDetails";
 import Tweets from "./pages/users/Tweets";
 
+import LoginPage from "./pages/login/LoginPage"
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -17,6 +19,7 @@ export default function App() {
             <Route index element={<Tweets />} />
           </Route>
         </Route>
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

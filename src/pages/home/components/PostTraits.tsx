@@ -1,4 +1,5 @@
 import { useState, memo } from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
 import { useUpdatePostMutation, useGetPostsQuery } from "../../../service/postsApi"
@@ -21,28 +22,40 @@ const PostTraits = ({ post }: Props) => {
 
   let [isFavs, setIsFavs] = useState(isLiked);
 
+  const navigate = useNavigate();
+
   const [updatedPost] = useUpdatePostMutation();
   const { refetch } = useGetPostsQuery("");
 
   const handleClick = async () => {
-    if (!isFavs) {
-      favs += 1;
-      await updatedPost({ ...post, favs, isLiked: !isFavs })
-      refetch()
+    const isLogined = localStorage.getItem('isLoggined')
+    if (isLogined) {
+      if (!isFavs) {
+        favs += 1;
+        await updatedPost({ ...post, favs, isLiked: !isFavs })
+        refetch()
+      } else {
+        favs -= 1;
+        await updatedPost({ ...post, favs, isLiked: !isFavs })
+        refetch()
+      }
+      setIsFavs(!isFavs)
     } else {
-      favs -= 1;
-      await updatedPost({ ...post, favs, isLiked: !isFavs })
-      refetch()
+      navigate('/login')
     }
-    setIsFavs(!isFavs)
   };
 
   const onReply = () => {
-    const replyPopup = document.querySelectorAll('.reply-box');
-    for (let i = 0; i < replyPopup.length; i++) {
-      if (i === post.id - 1) {
-        (replyPopup[i] as HTMLElement).style.display = 'block';
+    const isLogined = localStorage.getItem('isLoggined')
+    if (isLogined) {
+      const replyPopup = document.querySelectorAll('.reply-box');
+      for (let i = 0; i < replyPopup.length; i++) {
+        if (i === post.id - 1) {
+          (replyPopup[i] as HTMLElement).style.display = 'block';
+        }
       }
+    } else {
+      navigate('/login')
     }
   }
 
