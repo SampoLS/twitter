@@ -20,7 +20,6 @@ const LoginForm = () => {
     for (let i = 0; i < data.length; i++) {
       if (data[i].id === username && data[i].password === password) {
         navigate('/home')
-        console.log(data[i])
         localStorage.setItem('isLoggined', data[i].isLoggined);
       } else {
         alert('check your username or password')

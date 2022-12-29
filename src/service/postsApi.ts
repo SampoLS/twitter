@@ -4,6 +4,7 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000",
+    mode: "cors",
   }),
   endpoints: (builder) => ({
     getPosts: builder.query({
@@ -26,20 +27,20 @@ export const api = createApi({
         return {
           url: `/posts/${body.id}`,
           method: "PUT",
-          body
-        }
-      }
+          body,
+        };
+      },
     }),
     getUser: builder.query({
-      query: () => "/users"
-    })
+      query: () => "/users",
+    }),
   }),
 });
 
-export const { 
+export const {
   useGetPostsQuery,
   useAddPostMutation,
   useUpdatePostMutation,
   useGetUserQuery,
-  useGetHappensQuery
+  useGetHappensQuery,
 } = api;

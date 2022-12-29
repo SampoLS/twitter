@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import styled from "styled-components";
 
 import { useGetPostsQuery } from "../../service/postsApi";
+import { useGetUserQuery } from "../../service/postsApi";
 
 import Text from "../../components/Text";
 import Icons from "../../components/Icons";
@@ -10,6 +11,7 @@ import Reply from "../../components/Button";
 function ReplyPopup({ single, idx }: any) {
   const { data: posts } = useGetPostsQuery("");
   const [post, setPost] = useState("");
+  const { data: user } = useGetUserQuery('');
 
   let item;
   if (posts) item = posts.filter((p: any) => p.userId === "mr_good_man");
@@ -17,9 +19,15 @@ function ReplyPopup({ single, idx }: any) {
   const closePopup = (idx: number) => {
     const popup = document.querySelectorAll(".reply-box");
     for (let i = 0; i < popup.length; i++) {
-      if (i === idx) (popup[i] as HTMLElement).style.display = "none";
+      if (i === idx) {
+        (popup[i] as HTMLElement).style.display = "none";
+      }
     }
   };
+
+  const handleReply = () => {
+    
+  }
 
   return (
     <Section className="reply-box">
@@ -49,7 +57,7 @@ function ReplyPopup({ single, idx }: any) {
           <Text post={post} setPost={setPost} text="Tweet your reply" />
           <div className="icon-and-reply">
             <Icons />
-            <Reply onHandleClick={() => {}} post={post} />
+            <Reply onHandleClick={handleReply} post={post} />
           </div>
         </div>
       </div>
